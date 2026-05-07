@@ -1,3 +1,7 @@
+import gasliLogo from "./assets/gasliLogo.jpeg";
+import sodapalLogo from "./assets/sodapallogo-removebg-preview.png";
+import minecraftLogo from "./assets/minecraftlogo.svg";
+
 export const config = {
     developer: {
         name: "Roberto Siracusa",
@@ -118,7 +122,7 @@ export const config = {
             title: "GasliApp",
             category: "Mobile App",
             technologies: "React Native, Supabase, Node.js, Express, Typescript, Android, iOS",
-            image: "/images/drihti.png",
+            image: gasliLogo,
             description: "A mobile app that provides real-time monitoring status of Gas Stations in Venezuela. Features include location-based  index, historical data visualization."
         },
         {
@@ -126,7 +130,7 @@ export const config = {
             title: "BCV Api",
             category: "API / Data",
             technologies: "PHP, Python, Java,Typescript,Javascript, Web Scraping, REST API",
-            image: "/images/voechain.png",
+            image: "",
             description: "An API that provides real-time exchange rates from the Central Bank of Venezuela (BCV). It scrapes the BCV website for accurate and up-to-date currency data, making it accessible for developers and applications."
         },
         {
@@ -134,7 +138,7 @@ export const config = {
             title: "Minecraft Syncronizer",
             category: "Cloud / Automation",
             technologies: "Python, AWS, Google Cloud, Azure, Automation, Scripting",
-            image: "/images/voechain.png",
+            image: minecraftLogo,
             description: "A cloud-based automation tool for synchronizing Minecraft worlds across different platforms."
         },
         {
@@ -142,7 +146,7 @@ export const config = {
             title: "Soon to be announced",
             category: "Web Service",
             technologies: "Typescript, Python, Django, React, Next.js, Node.js, AWS, Google Cloud",
-            image: "/images/voechain.png",
+            image: "",
             description: "A soon-to-be-announced web service that offers a web platform for enterprises to market and sell their products online, providing a seamless e-commerce experience for both businesses and customers."
         },
         {
@@ -150,7 +154,7 @@ export const config = {
             title: "SodaPal",
             category: "Mobile App",
             technologies: "React Native, Supabase, Node.js, Express, Typescript, Android",
-            image: "/images/voechain.png",
+            image: sodapalLogo,
             description: "A mobile app for managing and tracking soda consumption in real-time."
         }
         

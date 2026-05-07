@@ -62,7 +62,7 @@ Algunos textos están directamente en los componentes, no en config:
 | Archivo | Qué tiene hardcodeado |
 |---------|----------------------|
 | `Landing.tsx` | "Hello! I'm", "An", "CSE Student", "Full-Stack Developer" |
-| `Loading.tsx` | "Welcome", texto del marquee ("AI Engineer", "Full Stack Developer") |
+| `Loading.tsx` | "Welcome", texto del marquee ("CSE Student", "Full Stack Developer") |
 | `About.tsx` | "For me, Coding is art." (en morado, separado del párrafo) |
 | `Navbar.tsx` | Links de navegación |
 | `Contact.tsx` | Textos del formulario |
@@ -70,13 +70,23 @@ Algunos textos están directamente en los componentes, no en config:
 
 ### Imágenes de proyectos
 
-- `public/images/` — Foto personal (`mypicnbg.png`)
-- Las imágenes de proyectos se referencian en `config.ts` → `projects[].image`
-- Agregar imágenes en `public/images/` y actualizar la ruta en config
+- `src/assets/` — Imágenes importadas como módulos ES (Vite las hashea, sirven en Vercel):
+  - `gasliLogo.jpeg` → GasliApp
+  - `sodapallogo-removebg-preview.png` → SodaPal
+  - `minecraftlogo.svg` → Minecraft Syncronizer
+- Para agregar imagen nueva: poner archivo en `src/assets/`, importar en `config.ts`, asignar a `projects[].image`
+- Si un proyecto no tiene imagen, dejar `image: ""` → `Work.tsx` skipea el render (sin icono roto)
+- `public/favicon.svg` — Círculo naranja (`#fb6419`) usado como favicon
 
 ### Video
 
 - `public/video/video.webm` — Video usado en la sección TechStack
+
+### CV / Resume
+
+- `public/CV_Roberto_Siracusa.pdf` — CV en PDF servido como asset estático
+- Botón "RESUME" en `SocialIcons.tsx` apunta a `/CV_Roberto_Siracusa.pdf`, abre en pestaña nueva
+- Para actualizar: reemplazar el PDF en `public/` (mismo nombre) o cambiar `href` en `SocialIcons.tsx:72`
 
 ## Tech stack
 
@@ -99,10 +109,14 @@ npm run preview  # Preview del build
 
 ## Deploy
 
-Configurado para Vercel (`vercel.json`). Push a main y Vercel hace build automático.
+Vercel conectado al repo. `git push origin main` → Vercel build + deploy automático en `<project>.vercel.app`. PRs generan deploys preview con URL hasheada. Tab `Deployments` en GitHub muestra historial.
+
+URL production actual: https://portafiolio-personal-website.vercel.app/ (renombrar proyecto en Vercel para acortar).
 
 ## Notas
 
 - La pantalla de carga solo aparece en desktop (>768px). En mobile se salta directo al contenido.
 - El cursor personalizado solo funciona en desktop.
 - La sección Work usa scroll horizontal con pin en desktop; en mobile se apila verticalmente.
+- Mobile: `landing-container` usa `justify-content: center` para centrar verticalmente intro + subtitles. Foto mobile fue removida.
+- `vite.config.ts` no debe referenciar paquetes que no estén en `package.json` (ej: `three`, `@react-three/*`) — rollup falla en build.

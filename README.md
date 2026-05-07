@@ -109,7 +109,7 @@ npm run preview  # Preview del build
 
 Vercel conectado al repo. `git push origin main` → build + deploy automático. PRs generan deploys preview con URL hasheada.
 
-URL production: https://portafiolio-personal-website.vercel.app/
+URL production: https://rs-personal-portfolio.vercel.app/
 
 ## Notas
 

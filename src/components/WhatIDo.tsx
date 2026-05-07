@@ -1,9 +1,10 @@
 import { useEffect, useRef } from "react";
 import "./styles/WhatIDo.css";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { config } from "../config";
+import { useT } from "../i18n/LanguageProvider";
 
 const WhatIDo = () => {
+  const t = useT();
   const containerRef = useRef<(HTMLDivElement | null)[]>([]);
   const setRef = (el: HTMLDivElement | null, index: number) => {
     containerRef.current[index] = el;
@@ -88,14 +89,14 @@ const WhatIDo = () => {
             <div className="what-corner"></div>
 
             <div className="what-content-in">
-              <h3>{config.skills.develop.title}</h3>
-              <h4>{config.skills.develop.description}</h4>
+              <h3>{t.skills.develop.title}</h3>
+              <h4>{t.skills.develop.description}</h4>
               <p>
-                {config.skills.develop.details}
+                {t.skills.develop.details}
               </p>
-              <h5>Skillset & tools</h5>
+              <h5>{t.ui.whatIDo.skillsetTools}</h5>
               <div className="what-content-flex">
-                {config.skills.develop.tools.map((tool, index) => (
+                {t.skills.develop.tools.map((tool, index) => (
                   <div key={index} className="what-tags">{tool}</div>
                 ))}
               </div>
@@ -121,14 +122,14 @@ const WhatIDo = () => {
             </div>
             <div className="what-corner"></div>
             <div className="what-content-in">
-              <h3>{config.skills.design.title}</h3>
-              <h4>{config.skills.design.description}</h4>
+              <h3>{t.skills.design.title}</h3>
+              <h4>{t.skills.design.description}</h4>
               <p>
-                {config.skills.design.details}
+                {t.skills.design.details}
               </p>
-              <h5>Skillset & tools</h5>
+              <h5>{t.ui.whatIDo.skillsetTools}</h5>
               <div className="what-content-flex">
-                {config.skills.design.tools.map((tool, index) => (
+                {t.skills.design.tools.map((tool, index) => (
                   <div key={index} className="what-tags">{tool}</div>
                 ))}
               </div>

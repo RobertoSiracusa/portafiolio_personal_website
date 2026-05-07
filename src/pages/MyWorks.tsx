@@ -1,22 +1,23 @@
 import { Link } from "react-router-dom";
-import { config } from "../config";
+import { useT } from "../i18n/LanguageProvider";
 import "./MyWorks.css";
 
 const MyWorks = () => {
+  const t = useT();
   return (
     <div className="myworks-page">
       <div className="myworks-header">
         <Link to="/" className="back-button" data-cursor="disable">
-          ← Back to Home
+          {t.ui.myWorks.back}
         </Link>
         <h1>
-          All <span>Works</span>
+          {t.ui.myWorks.allTitle} <span>{t.ui.myWorks.works}</span>
         </h1>
-        <p>A collection of all my projects and creations</p>
+        <p>{t.ui.myWorks.subtitle}</p>
       </div>
 
       <div className="myworks-grid">
-        {config.projects.map((project, index) => (
+        {t.projects.map((project, index) => (
           <div className="myworks-card" key={project.id} data-cursor="disable">
             <div className="myworks-card-number">0{index + 1}</div>
             <div className="myworks-card-image">

@@ -6,9 +6,10 @@ import "./styles/SocialIcons.css";
 import { TbNotes } from "react-icons/tb";
 import { useEffect } from "react";
 import HoverLinks from "./HoverLinks";
-import { config } from "../config";
+import { useT } from "../i18n/LanguageProvider";
 
 const SocialIcons = () => {
+  const t = useT();
   useEffect(() => {
     const social = document.getElementById("social") as HTMLElement;
 
@@ -59,18 +60,18 @@ const SocialIcons = () => {
     <div className="icons-section">
       <div className="social-icons" data-cursor="icons" id="social">
         <span>
-          <a href={config.contact.github} target="_blank" rel="noopener noreferrer">
+          <a href={t.contact.github} target="_blank" rel="noopener noreferrer">
             <FaGithub />
           </a>
         </span>
         <span>
-          <a href={config.contact.linkedin} target="_blank" rel="noopener noreferrer">
+          <a href={t.contact.linkedin} target="_blank" rel="noopener noreferrer">
             <FaLinkedinIn />
           </a>
         </span>
       </div>
-      <a className="resume-button" href="/CV_Roberto_Siracusa.pdf" target="_blank" rel="noopener noreferrer">
-        <HoverLinks text="RESUME" />
+      <a className="resume-button" href={t.ui.cvFile} target="_blank" rel="noopener noreferrer">
+        <HoverLinks text={t.ui.socialIcons.resume} />
         <span>
           <TbNotes />
         </span>

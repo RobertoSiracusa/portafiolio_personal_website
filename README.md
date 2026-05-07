@@ -1,92 +1,90 @@
 # Portfolio Website
 
-Portfolio personal construido con React + TypeScript + GSAP.
+Portfolio personal construido con React + TypeScript + GSAP. Soporta i18n (Inglés / Español) con auto-detección del idioma del navegador.
 
 ## Estructura del proyecto
 
 ```
 src/
-├── config.ts              ← ARCHIVO PRINCIPAL DE CONTENIDO (textos, datos, links)
-├── App.tsx                ← Rutas de la app (/, /myworks)
+├── i18n/
+│   ├── translations.ts     ← ARCHIVO PRINCIPAL DE CONTENIDO (textos en EN + ES)
+│   └── LanguageProvider.tsx ← Context + hook useT() / useLanguage()
+├── config.ts               ← (legacy, no usado — todo el contenido vive en i18n/translations.ts)
+├── App.tsx                 ← Rutas + LanguageProvider wrapping
 ├── context/
 │   └── LoadingProvider.tsx ← Pantalla de carga inicial (desktop only)
 ├── components/
-│   ├── Landing.tsx        ← Sección hero (nombre + títulos)
-│   ├── About.tsx          ← Sección "About Me"
-│   ├── WhatIDo.tsx        ← Sección de habilidades
-│   ├── Career.tsx         ← Timeline de experiencia
-│   ├── Work.tsx           ← Proyectos (scroll horizontal desktop)
-│   ├── WorkImage.tsx      ← Componente de imagen de proyecto
-│   ├── TechStackNew.tsx   ← Stack tecnológico con video
-│   ├── CallToAction.tsx   ← Botón "Hire Me"
-│   ├── Contact.tsx        ← Formulario/info de contacto
-│   ├── Navbar.tsx         ← Barra de navegación + Lenis smooth scroll
-│   ├── SocialIcons.tsx    ← GitHub + LinkedIn icons
-│   ├── HoverLinks.tsx     ← Efecto hover en links
-│   ├── Loading.tsx        ← Animación de carga (auto-trigger, sin modelo 3D)
-│   ├── Cursor.tsx         ← Cursor personalizado (desktop)
-│   ├── MainContainer.tsx  ← Contenedor principal (monta secciones + GSAP timelines)
-│   ├── styles/            ← CSS de cada componente
+│   ├── Landing.tsx         ← Sección hero (nombre + títulos)
+│   ├── About.tsx           ← Sección "Sobre Mí"
+│   ├── WhatIDo.tsx         ← Sección de habilidades
+│   ├── Career.tsx          ← Timeline de experiencia
+│   ├── Work.tsx            ← Proyectos (scroll horizontal desktop)
+│   ├── WorkImage.tsx       ← Componente de imagen de proyecto
+│   ├── TechStackNew.tsx    ← Stack tecnológico con video
+│   ├── CallToAction.tsx    ← Botón "Hire Me" / "Contrátame"
+│   ├── Contact.tsx         ← Info de contacto
+│   ├── Navbar.tsx          ← Navegación + Lenis smooth scroll + toggle EN/ES
+│   ├── SocialIcons.tsx     ← GitHub + LinkedIn + Resume
+│   ├── HoverLinks.tsx      ← Efecto hover en links
+│   ├── Loading.tsx         ← Animación de carga
+│   ├── Cursor.tsx          ← Cursor personalizado (desktop)
+│   ├── MainContainer.tsx   ← Contenedor principal (monta secciones + GSAP timelines)
+│   ├── styles/             ← CSS de cada componente
 │   └── utils/
-│       ├── GsapScroll.ts  ← Animaciones de scroll (GSAP + ScrollTrigger)
-│       ├── initialFX.ts   ← Animaciones de entrada al cargar
-│       └── splitText.ts   ← Split text para animaciones por palabra/caracter
+│       ├── GsapScroll.ts   ← Animaciones de scroll (GSAP + ScrollTrigger)
+│       ├── initialFX.ts    ← Animaciones de entrada al cargar
+│       └── splitText.ts    ← Split text para animaciones por palabra/caracter
 ├── utils/
-│   └── textSplitter.ts   ← Motor de split text
+│   └── textSplitter.ts     ← Motor de split text
 └── pages/
-    ├── MyWorks.tsx        ← Página con todos los proyectos
-    └── MyWorks.css        ← Estilos de la página
+    ├── MyWorks.tsx         ← Página con todos los proyectos
+    └── MyWorks.css         ← Estilos de la página
 ```
 
-## Dónde modificar textos y datos
+## Internacionalización (i18n)
 
-### `src/config.ts` — Archivo central de contenido
+- **Auto-detección**: `navigator.language` empieza con `es*` → español, resto → inglés.
+- **Persistencia**: localStorage key `lang` (sobrescribe auto-detect).
+- **Toggle manual**: botón en Navbar (muestra el idioma alternativo: en español se ve "EN", en inglés "ES").
+- **`<html lang>`**: actualizado dinámicamente para SEO + selectores CSS por idioma.
 
-Aquí se controla casi todo el texto visible del sitio:
+### Editar textos
 
-| Sección | Campo en config | Qué controla |
-|---------|----------------|--------------|
-| Hero / Landing | `developer.name`, `developer.fullName` | Nombre que aparece arriba |
-| Hero / Landing | `developer.title` | Título profesional |
-| About | `about.title`, `about.description` | Texto de la sección "About Me" |
-| Experiencia | `experiences[]` | Cards del timeline (posición, empresa, período, descripción, tecnologías) |
-| Proyectos | `projects[]` | Cards de proyectos (título, categoría, tecnologías, imagen, descripción) |
-| Habilidades | `skills.develop`, `skills.design` | Sección "What I Do" (título, descripción, herramientas) |
-| Contacto | `contact.email`, `contact.github`, `contact.linkedin` | Links de contacto |
-| Social | `social.*` | GitHub username, email, ubicación |
+Todo el contenido visible vive en `src/i18n/translations.ts`, dos objetos paralelos `en` y `es` con la misma estructura.
 
-### Textos hardcodeados en componentes
+| Sección | Campo | Qué controla |
+|---------|-------|--------------|
+| Hero / Landing | `developer.name`, `developer.fullName`, `developer.title` | Nombre + título profesional |
+| Landing UI | `ui.landing.{hello,an,role1,role2}` | "Hello! I'm" / "¡Hola! Soy", roles |
+| About | `about.{title,description,motto}` | Texto principal + frase final destacada |
+| Experiencia | `experiences[]` | Timeline (posición, empresa, período, descripción, tecnologías) |
+| Proyectos | `projects[]` | Cards (título, categoría, tecnologías, imagen, descripción) |
+| Habilidades | `skills.develop`, `skills.design` | Sección "What I Do" |
+| Contacto | `contact.{email,github,linkedin}`, `social.location` | Links + ubicación |
+| UI strings | `ui.nav`, `ui.career`, `ui.work`, `ui.contact`, `ui.myWorks`, `ui.loading`, `ui.cta`, `ui.techStack`, `ui.whatIDo`, `ui.socialIcons` | Etiquetas de cada sección |
+| CV | `ui.cvFile` | Path al PDF (puede diferir EN/ES si quieres dos PDFs) |
 
-Algunos textos están directamente en los componentes, no en config:
+### Agregar un idioma nuevo
 
-| Archivo | Qué tiene hardcodeado |
-|---------|----------------------|
-| `Landing.tsx` | "Hello! I'm", "An", "CSE Student", "Full-Stack Developer" |
-| `Loading.tsx` | "Welcome", texto del marquee ("CSE Student", "Full Stack Developer") |
-| `About.tsx` | "For me, Coding is art." (en morado, separado del párrafo) |
-| `Navbar.tsx` | Links de navegación |
-| `Contact.tsx` | Textos del formulario |
-| `CallToAction.tsx` | "Hire Me →" |
+1. Agregar `Lang` enum en `translations.ts` (ej: `"de"`).
+2. Crear objeto `de: Translation = { ... }` siguiendo la misma estructura.
+3. Añadirlo a `translations`: `{ en, es, de }`.
+4. Ajustar `detectLang()` con la regla de detección.
+5. Si los textos largos rompen layout, agregar overrides CSS con `html[lang="de"]` (ver Landing.css como referencia).
 
-### Imágenes de proyectos
+### Estilos por idioma
 
-- `src/assets/` — Imágenes importadas como módulos ES (Vite las hashea, sirven en Vercel):
-  - `gasliLogo.jpeg` → GasliApp
-  - `sodapallogo-removebg-preview.png` → SodaPal
-  - `minecraftlogo.svg` → Minecraft Syncronizer
-- Para agregar imagen nueva: poner archivo en `src/assets/`, importar en `config.ts`, asignar a `projects[].image`
-- Si un proyecto no tiene imagen, dejar `image: ""` → `Work.tsx` skipea el render (sin icono roto)
-- `public/favicon.svg` — Círculo naranja (`#fb6419`) usado como favicon
+Algunos textos en español son más largos que en inglés y rompen layouts hardcodeados con `nowrap` o `width` fijo. Solución: selectores `html[lang="es"]` en CSS (ej: `Landing.css` final del archivo) que ajustan tamaños y permiten wrap.
 
-### Video
+## Imágenes / video / CV
 
-- `public/video/video.webm` — Video usado en la sección TechStack
-
-### CV / Resume
-
-- `public/CV_Roberto_Siracusa.pdf` — CV en PDF servido como asset estático
-- Botón "RESUME" en `SocialIcons.tsx` apunta a `/CV_Roberto_Siracusa.pdf`, abre en pestaña nueva
-- Para actualizar: reemplazar el PDF en `public/` (mismo nombre) o cambiar `href` en `SocialIcons.tsx:72`
+- `src/assets/` — Imágenes importadas como módulos ES (Vite hashea):
+  - `gasliLogo.jpeg`, `sodapallogo-removebg-preview.png`, `minecraftlogo.svg`
+- Para agregar imagen: poner en `src/assets/`, importar en `translations.ts`, asignar a `projects[].image` en ambos idiomas (las imágenes se comparten entre EN y ES — solo cambia el texto).
+- Si un proyecto no tiene imagen: `image: ""` → `Work.tsx` skipea render.
+- `public/favicon.svg` — Favicon naranja (`#fb6419`).
+- `public/video/video.webm` — Video sección TechStack.
+- `public/CV_Roberto_Siracusa.pdf` — CV. Botón "RESUME"/"CV" en `SocialIcons.tsx` lee `ui.cvFile` de translations.
 
 ## Tech stack
 
@@ -109,14 +107,14 @@ npm run preview  # Preview del build
 
 ## Deploy
 
-Vercel conectado al repo. `git push origin main` → Vercel build + deploy automático en `<project>.vercel.app`. PRs generan deploys preview con URL hasheada. Tab `Deployments` en GitHub muestra historial.
+Vercel conectado al repo. `git push origin main` → build + deploy automático. PRs generan deploys preview con URL hasheada.
 
-URL production actual: https://portafiolio-personal-website.vercel.app/ (renombrar proyecto en Vercel para acortar).
+URL production: https://portafiolio-personal-website.vercel.app/
 
 ## Notas
 
-- La pantalla de carga solo aparece en desktop (>768px). En mobile se salta directo al contenido.
-- El cursor personalizado solo funciona en desktop.
-- La sección Work usa scroll horizontal con pin en desktop; en mobile se apila verticalmente.
-- Mobile: `landing-container` usa `justify-content: center` para centrar verticalmente intro + subtitles. Foto mobile fue removida.
-- `vite.config.ts` no debe referenciar paquetes que no estén en `package.json` (ej: `three`, `@react-three/*`) — rollup falla en build.
+- Pantalla de carga solo en desktop (>768px). Mobile salta al contenido.
+- Cursor personalizado solo desktop.
+- Sección Work: scroll horizontal con pin en desktop; mobile apila vertical.
+- Título "WHAT I DO" no se traduce — depende de letter-split styling (`.hat-h2`, `.do-h2`).
+- `vite.config.ts` no debe referenciar paquetes ausentes en `package.json` — rollup falla en build.

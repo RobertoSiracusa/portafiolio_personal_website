@@ -7,33 +7,36 @@ import "./App.css";
 const MainContainer = lazy(() => import("./components/MainContainer"));
 const MyWorks = lazy(() => import("./pages/MyWorks"));
 import { LoadingProvider } from "./context/LoadingProvider";
+import { LanguageProvider } from "./i18n/LanguageProvider";
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <LoadingProvider>
-              <Suspense>
-                <MainContainer />
+    <LanguageProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <LoadingProvider>
+                <Suspense>
+                  <MainContainer />
+                </Suspense>
+              </LoadingProvider>
+            }
+          />
+          <Route
+            path="/myworks"
+            element={
+              <Suspense fallback={<div>Loading...</div>}>
+                <MyWorks />
               </Suspense>
-            </LoadingProvider>
-          }
-        />
-        <Route
-          path="/myworks"
-          element={
-            <Suspense fallback={<div>Loading...</div>}>
-              <MyWorks />
-            </Suspense>
-          }
-        />
-      </Routes>
-      <Analytics />
-      <SpeedInsights />
-    </BrowserRouter>
+            }
+          />
+        </Routes>
+        <Analytics />
+        <SpeedInsights />
+      </BrowserRouter>
+    </LanguageProvider>
   );
 };
 

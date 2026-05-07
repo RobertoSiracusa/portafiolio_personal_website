@@ -45,6 +45,36 @@
   font-size: 13px;
   letter-spacing: 0.2px;
 }
+.lang-toggle {
+  background: transparent;
+  border: 1px solid #ccc;
+  color: #eae5ec;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 12px;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+.lang-toggle:hover {
+  background: #eae5ec;
+  color: #000;
+}
+@media only screen and (min-width: 500px) {
+  .lang-toggle {
+    font-size: 13px;
+    padding: 5px 10px;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  .lang-toggle {
+    font-size: 14px;
+    padding: 6px 12px;
+  }
+}
 @media only screen and (min-width: 500px) {
   .header {
     padding: 20px 0px;

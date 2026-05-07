@@ -1,6 +1,6 @@
 import { MdArrowOutward, MdCopyright } from "react-icons/md";
 import "./styles/Contact.css";
-import { config } from "../config";
+import { useT } from "../i18n/LanguageProvider";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect } from "react";
@@ -8,6 +8,7 @@ import { useEffect } from "react";
 gsap.registerPlugin(ScrollTrigger);
 
 const Contact = () => {
+  const t = useT();
   useEffect(() => {
     const contactTimeline = gsap.timeline({
       scrollTrigger: {
@@ -59,24 +60,24 @@ const Contact = () => {
   return (
     <div className="contact-section section-container" id="contact">
       <div className="contact-container">
-        <h3>{config.developer.fullName}</h3>
+        <h3>{t.developer.fullName}</h3>
         <div className="contact-flex">
           <div className="contact-box">
-            <h4>Email</h4>
+            <h4>{t.ui.contact.email}</h4>
             <p>
-              <a href={`mailto:${config.contact.email}`} data-cursor="disable">
-                {config.contact.email}
+              <a href={`mailto:${t.contact.email}`} data-cursor="disable">
+                {t.contact.email}
               </a>
             </p>
-            <h4>Location</h4>
+            <h4>{t.ui.contact.location}</h4>
             <p>
-              <span>{config.social.location}</span>
+              <span>{t.social.location}</span>
             </p>
           </div>
           <div className="contact-box">
-            <h4>Social</h4>
+            <h4>{t.ui.contact.social}</h4>
             <a
-              href={config.contact.github}
+              href={t.contact.github}
               target="_blank"
               rel="noopener noreferrer"
               data-cursor="disable"
@@ -85,7 +86,7 @@ const Contact = () => {
               Github <MdArrowOutward />
             </a>
             <a
-              href={config.contact.linkedin}
+              href={t.contact.linkedin}
               target="_blank"
               rel="noopener noreferrer"
               data-cursor="disable"
@@ -93,13 +94,10 @@ const Contact = () => {
             >
               Linkedin <MdArrowOutward />
             </a>
-            
-            
-            
           </div>
           <div className="contact-box">
             <h2>
-              Designed and Developed <br /> by <span>{config.developer.fullName}</span>
+              {t.ui.contact.designedBy} <br /> {t.ui.contact.by} <span>{t.developer.fullName}</span>
             </h2>
             <h5>
               <MdCopyright /> {new Date().getFullYear()}

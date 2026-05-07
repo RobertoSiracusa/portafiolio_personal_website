@@ -1,15 +1,14 @@
 import "./styles/About.css";
-import { config } from "../config";
+import { useT } from "../i18n/LanguageProvider";
 
 const About = () => {
+  const t = useT();
   return (
     <div className="about-section" id="about">
       <div className="about-me">
-        <h3 className="title">{config.about.title}</h3>
-        <p className="para">
-          {config.about.description.replace(" For me, Coding is art.", "")}
-        </p>
-        <p className="para" style={{ color: "var(--accentColor)" }}>For me, Coding is art.</p>
+        <h3 className="title">{t.about.title}</h3>
+        <p className="para">{t.about.description}</p>
+        <p className="para" style={{ color: "var(--accentColor)" }}>{t.about.motto}</p>
       </div>
     </div>
   );

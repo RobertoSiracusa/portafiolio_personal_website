@@ -3,12 +3,13 @@ import WorkImage from "./WorkImage";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect } from "react";
-import { config } from "../config";
+import { useT } from "../i18n/LanguageProvider";
 import { Link } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Work = () => {
+  const t = useT();
   useEffect(() => {
     // Disable pinning on mobile to allow scrolling
     if (window.innerWidth <= 768) return;
@@ -62,10 +63,10 @@ const Work = () => {
     <div className="work-section" id="work">
       <div className="work-container section-container">
         <h2>
-          My <span>Personal</span> Projects
+          {t.ui.work.titleMy} <span>{t.ui.work.titlePersonal}</span> {t.ui.work.titleProjects}
         </h2>
         <div className="work-flex">
-          {config.projects.slice(0, 5).map((project, index) => (
+          {t.projects.slice(0, 5).map((project, index) => (
             <div className="work-box" key={project.id}>
               <div className="work-info">
                 <div className="work-title">
@@ -77,7 +78,7 @@ const Work = () => {
                   </div>
                 </div>
                 <p className="work-description">{project.description}</p>
-                <h4>Tools and features</h4>
+                <h4>{t.ui.work.toolsAndFeatures}</h4>
                 <p>{project.technologies}</p>
               </div>
               {project.image && <WorkImage image={project.image} alt={project.title} />}
@@ -86,10 +87,10 @@ const Work = () => {
           {/* See All Works Button */}
           <div className="work-box work-box-cta">
             <div className="see-all-works">
-              <h3>Want to see more?</h3>
-              <p>Explore all of my projects and creations</p>
+              <h3>{t.ui.work.wantSeeMore}</h3>
+              <p>{t.ui.work.exploreAll}</p>
               <Link to="/myworks" className="see-all-btn" data-cursor="disable">
-                See All Works →
+                {t.ui.work.seeAllWorks}
               </Link>
             </div>
           </div>

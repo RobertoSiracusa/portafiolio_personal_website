@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import "./styles/Loading.css";
 import { useLoading } from "../context/LoadingProvider";
+import { useT } from "../i18n/LanguageProvider";
 
 import Marquee from "react-fast-marquee";
 
 const Loading = () => {
   const { setIsLoading } = useLoading();
+  const t = useT();
   const [loaded, setLoaded] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [clicked, setClicked] = useState(false);
@@ -61,8 +63,8 @@ const Loading = () => {
       <div className="loading-screen">
         <div className="loading-marquee">
           <Marquee>
-            <span>&nbsp; CSE Student &nbsp;</span> <span>&nbsp; Full Stack Developer &nbsp;</span>
-            <span>&nbsp; CSE Student &nbsp;</span> <span>&nbsp; Full Stack Developer &nbsp;</span>
+            <span>&nbsp; {t.ui.loading.role1} &nbsp;</span> <span>&nbsp; {t.ui.loading.role2} &nbsp;</span>
+            <span>&nbsp; {t.ui.loading.role1} &nbsp;</span> <span>&nbsp; {t.ui.loading.role2} &nbsp;</span>
           </Marquee>
         </div>
         <div
@@ -74,13 +76,13 @@ const Loading = () => {
             <div className="loading-container">
               <div className="loading-content">
                 <div className="loading-content-in">
-                  Welcome
+                  {t.ui.loading.welcome}
                 </div>
               </div>
               <div className="loading-box"></div>
             </div>
             <div className="loading-content2">
-              <span>Welcome</span>
+              <span>{t.ui.loading.welcome}</span>
             </div>
           </div>
         </div>

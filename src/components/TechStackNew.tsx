@@ -1,4 +1,5 @@
 import "./styles/TechStackNew.css";
+import { useT } from "../i18n/LanguageProvider";
 
 interface TechItem {
   name: string;
@@ -64,6 +65,7 @@ const techStack: TechItem[][] = [
 ];
 
 const TechStackNew = () => {
+  const t = useT();
   return (
     <div className="techstack-new">
       {/* Video Background */}
@@ -83,7 +85,7 @@ const TechStackNew = () => {
 
       {/* Content */}
       <div className="techstack-content">
-        <h2>Tech Stack</h2>
+        <h2>{t.ui.techStack.title}</h2>
         
         <div className="techstack-pyramid">
           {techStack.map((row, rowIndex) => (

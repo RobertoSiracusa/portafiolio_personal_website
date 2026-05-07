@@ -1,9 +1,10 @@
 import "./styles/Landing.css";
-import { config } from "../config";
+import { useT } from "../i18n/LanguageProvider";
 
 const Landing = () => {
-  const nameParts = config.developer.fullName.split(" ");
-  const firstName = nameParts[0] || config.developer.name;
+  const t = useT();
+  const nameParts = t.developer.fullName.split(" ");
+  const firstName = nameParts[0] || t.developer.name;
   const lastName = nameParts.slice(1).join(" ") || "";
 
   return (
@@ -11,7 +12,7 @@ const Landing = () => {
       <div className="landing-section" id="landingDiv">
         <div className="landing-container">
           <div className="landing-intro">
-            <h2>Hello! I'm</h2>
+            <h2>{t.ui.landing.hello}</h2>
             <h1>
               {firstName.toUpperCase()}
               {' '}
@@ -20,12 +21,12 @@ const Landing = () => {
             </h1>
           </div>
           <div className="landing-info">
-            <h3>An</h3>
+            {t.ui.landing.an && <h3>{t.ui.landing.an}</h3>}
             <h2 className="landing-info-h2">
-              <div className="landing-h2-1">CSE Student</div>
+              <div className="landing-h2-1">{t.ui.landing.role1}</div>
             </h2>
             <h2>
-              <div className="landing-h2-info">Full-Stack Developer</div>
+              <div className="landing-h2-info">{t.ui.landing.role2}</div>
             </h2>
           </div>
         </div>

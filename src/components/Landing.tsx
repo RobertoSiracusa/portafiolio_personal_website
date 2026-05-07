@@ -28,10 +28,6 @@ const Landing = () => {
               <div className="landing-h2-info">Full-Stack Developer</div>
             </h2>
           </div>
-          {/* Mobile photo */}
-          <div className="mobile-photo">
-            <img src="/images/mypicnbg.png" alt="Roberto Siracusa" />
-          </div>
         </div>
       </div>
     </>
